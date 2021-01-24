@@ -60,3 +60,6 @@ gem 'pry-byebug'
 gem 'carrierwave'
 gem "mini_magick"
 gem 'rails-i18n'
+gem 'uglifier'
+gem 'jquery-rails'
+gem 'bootstrap'
