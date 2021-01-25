@@ -10,6 +10,7 @@ import "channels";
 import "bootstrap";
 // import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
+import "hammerjs";
 
 // require("src/image_upload");
 Rails.start();
