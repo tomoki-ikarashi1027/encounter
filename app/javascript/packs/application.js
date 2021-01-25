@@ -10,6 +10,8 @@ import "channels";
 import "bootstrap";
 // import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
+
+// require("src/image_upload");
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();

@@ -2,7 +2,11 @@
   <%= render "partial/navbar" %>
 
   <div class="profile mt-4">
+    <% if @user.image.url.nil? %>
     <div class="profile-default-img"></div>
+    <% else %>
+    <%= image_tag @user.image.url, class: "profile-img" %>
+    <% end %>
     <div class="profile-name mt-4">
       <%= @user.name %>
     </div>
