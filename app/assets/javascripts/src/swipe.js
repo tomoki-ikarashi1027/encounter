@@ -52,7 +52,8 @@ if (location.pathname == "/users") {
 
         let keep = Math.abs(event.deltaX) < 150;
         event.target.classList.toggle("removed", !keep);
-        console.log(event.target.style.transform);
+
+        let reaction = event.deltaX > 0 ? "like" : "dislike";
 
         if (keep) {
           event.target.style.transform = "";
@@ -67,6 +68,8 @@ if (location.pathname == "/users") {
           let yMulti = event.deltaY / 80;
           let rotate = xMulti * yMulti;
 
+          postReaction(el.id, reaction);
+
           event.target.style.transform =
             "translate(" +
             toX +
@@ -80,11 +83,42 @@ if (location.pathname == "/users") {
         }
       });
     });
+
+    // function set_csrftoken() {
+    //   $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+    //     if (!options.crossDomain) {
+    //       const token = $('meta[name="csrf-token"]').attr("content");
+    //       if (token) {
+    //         return jqXHR.setRequestHeader("X-CSRF-Token", token);
+    //       }
+    //     }
+    //   });
+    // }
+
+    function postReaction(user_id, reaction) {
+      // set_csrftoken();
+      $.ajax({
+        url: "reactions.json",
+        type: "POST",
+        datatype: "json",
+        data: {
+          user_id: user_id,
+          reaction: reaction,
+        },
+      }).done(function () {
+        console.log("done!");
+      });
+    }
+
     function createButtonListener(reaction) {
       let cards = document.querySelectorAll(".swipe--card:not(.removed)");
       if (!cards.length) return false;
       let moveOutWidth = document.body.clientWidth * 2;
       let card = cards[0];
+
+      let user_id = card.id;
+
+      postReaction(user_id, reaction);
       card.classList.add("removed");
 
       if (reaction == "like") {
